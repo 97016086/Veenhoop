@@ -9,7 +9,7 @@ class Subject extends Model
 
 	public function Grade()
 	{
-		return	$this->belongsTo(Grade::class);
+		return	$this->hasMany(Grade::class);
 	}
 
 	public	function	Teacher()

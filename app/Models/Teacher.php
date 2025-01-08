@@ -8,7 +8,7 @@ class Teacher extends Model
 {
 	public	function	Subject()
 	{
-		return	$this->belongsToMany(Subject::class);
+		return	$this->belongsTo(Subject::class);
 	}
 
 	public	function	Student()
