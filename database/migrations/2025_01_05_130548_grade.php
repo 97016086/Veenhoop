@@ -12,12 +12,12 @@ return new class extends Migration
 	 */
 	public function up(): void
 	{
-		Schema::create(table: 'grade', callback: function (Blueprint $table): void {
+		Schema::create(table: 'grade', callback: function (Blueprint $table) {
 			$table->id();
-			$table->foreignId('student_id')->constrained();
-			$table->foreignId('subject_id')->constrained();
-			$table->foreignId('teacher_id')->constrained();
-			$table->unsignedInteger('score');
+			$table->unsignedBigInteger('student_id')->index();
+			$table->unsignedBigInteger('subject_id')->index();
+			$table->unsignedBigInteger('teacher_id');
+			$table->decimal('score', 5, 2,);
 			$table->unsignedInteger('block');
 			$table->unsignedInteger('created_at');
 		});
