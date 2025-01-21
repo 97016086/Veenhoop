@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use	App\Models\Grade;
-use App\Models\Klas;
+use App\Models\Student;
 use App\Models\Subject;
-use App\Models\User;
+
+
 
 class GradeController extends Controller
 {
@@ -32,7 +33,7 @@ class GradeController extends Controller
 		$grades	=	$gradesQuery->with(['student',	'subject',	'teacher'])->get();
 
 		return	view('grades.index',	compact('grades'));
-	}
+``	}
 
 
 	public	function	store(Request	$request)
@@ -45,6 +46,7 @@ class GradeController extends Controller
 			'score'	=>	'required|numeric|min:1|max:10',
 			'block'	=>	'required|string|max:10'
 		]);
+
 
 		//	Validatie of de docent het vak geeft
 		$subject	=	Subject::findOrFail($request->subject_id);
@@ -87,4 +89,5 @@ class GradeController extends Controller
 
 		return	redirect()->back()->with('succes', 'Cijfer succesvol bijgewerkt.');
 	}
+
 }
