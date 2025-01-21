@@ -4,6 +4,8 @@ namespace	App\Http\Controllers\Auth;
 
 use	App\Http\Controllers\Controller;
 use	App\Models\User;
+use App\Models\Teacher;
+use App\Models\Student;
 use	Illuminate\Auth\Events\Registered;
 use	Illuminate\Http\RedirectResponse;
 use	Illuminate\Http\Request;
@@ -34,6 +36,7 @@ class	RegisteredUserController	extends	Controller
 			'name'	=>	['required',	'string',	'max:255'],
 			'email'	=>	['required',	'string',	'lowercase', 'email', 'max:255', 'unique:' . User::class],
 			'password'	=>	['required',	'confirmed',	Rules\Password::defaults()],
+			'role'	=>	['required', 'in:teacher,student'],
 		]);
 
 		$user	=	User::create([
@@ -42,7 +45,12 @@ class	RegisteredUserController	extends	Controller
 			'password'	=>	Hash::make($request->password)
 		]);
 
-		event(new	Registered($user));
+		//	Rol-specifieke gegevens aanmmaken 
+		if ($request->role	===	'teacher') {
+			Teacher::create(['user_id'	=>	$user->id]);
+		} elseif ($request->role	===	'student') {
+			Student::create(['user_id'	=>	$user->id]);
+		}
 
 		Auth::login($user);
 
