@@ -1,3 +1,4 @@
+<x-app-layout>
 <table>
 	<thead>
 		<th>Student</th>
@@ -17,3 +18,4 @@
 			@endforeach
 	</tbody>
 </table>
+</x-app-layout>

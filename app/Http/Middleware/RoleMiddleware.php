@@ -16,10 +16,12 @@ class RoleMiddleware
 	 */
 	public function handle(Request $request, Closure $next, $role): Response
 	{
-		$user	=	Auth::user();
+		if ($role	===	'teacher'	&&	!$request->user()->isTeacher()) {
+			abort(403,	'Toegang	geweigerd.');
+		}
 
-		if (!$user ||	$user->role	!==	$role) {
-			abort(403, 'Toegang geweigerd.');
+		if ($role	===	'student'	&&	!$request->user()->isStudent()) {
+			abort(403, 'toegang	geweigerd');
 		}
 
 		return $next($request);

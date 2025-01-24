@@ -63,7 +63,7 @@ class GradeController extends Controller
 			'block'	=>	$request->block
 		]);
 
-		return	redirect()->back()->with('succes', 'Cijfer succesvol toegevoegd.');
+		return redirect()->back()->with('succes', 'Cijfer succesvol toegevoegd.');
 	}
 	//	Werk een bestaand cijfer bij. 
 	public	function	update(Request	$request, string	$id)
