@@ -18,7 +18,6 @@ return new class extends Migration
 			$table->unsignedBigInteger('grade_id');
 			$table->string('naam');
 			$table->string('achternaam');
-
 			$table->timestamps();
 		});
 	}
