@@ -8,13 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
 	use HasFactory;
-	public	function	grades()
+	public	function	grade()
 	{
 		return $this->hasMany(Grade::class);
 	}
 
-	public	function	subject()
+	public	function	subjects()
 	{
-		return	$this->belongsToMany(Subject::class);
+		return	$this->belongsToMany(Subject::class, 'student_subject')
+			->withPivotValue(['grade', 'ingeschreven_bij'])
+			->withTimestamps();
 	}
 }

@@ -65,4 +65,18 @@ class User extends Authenticatable
 	{
 		return	$this->student	!==	null;
 	}
+
+
+	public function role()
+	{
+		if ($this->isTeacher()) {
+			return 'teacher';
+		}
+
+		if ($this->isStudent()) {
+			return 'student';
+		}
+
+		return 'unknown';
+	}
 }
