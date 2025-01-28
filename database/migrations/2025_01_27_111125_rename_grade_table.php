@@ -11,13 +11,14 @@ return new class extends Migration
 	 */
 	public function up(): void
 	{
-		Schema::table('teachers',	function (Blueprint	$table) {
-			$table->string('email')->unique()->after('klas_id');
-		});
+		Schema::rename('grade', 'grades');
 	}
 
 	/**
 	 * Reverse the migrations.
 	 */
-	public function down(): void {}
+	public function down(): void
+	{
+		//
+	}
 };

@@ -2,17 +2,19 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Teacher extends Model
 {
-	public	function	Subject()
+	use	HasFactory;
+	public	function	subjects()
 	{
 		return	$this->hasMany(Subject::class);
 	}
 
-	public	function	Student()
+	public	function	students()
 	{
-		return	$this->belongsToMany(Student::class);
+		return	$this->hasManyThrough(Student::class,	Subject::class);
 	}
 }
