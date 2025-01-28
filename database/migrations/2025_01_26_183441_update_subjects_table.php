@@ -11,13 +11,17 @@ return new class extends Migration
 	 */
 	public function up(): void
 	{
-		Schema::table('teachers',	function (Blueprint	$table) {
-			$table->string('email')->unique()->after('klas_id');
+
+		Schema::table('subjects',	function (Blueprint	$table) {
+			$table->foreignId('teacher_id')->after('id')->constrained()->onDelete('cascade');
 		});
 	}
 
 	/**
 	 * Reverse the migrations.
 	 */
-	public function down(): void {}
+	public function down(): void
+	{
+		//
+	}
 };

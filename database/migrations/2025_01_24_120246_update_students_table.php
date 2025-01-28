@@ -11,10 +11,11 @@ return new class extends Migration
 	 */
 	public function up(): void
 	{
-		Schema::table('teachers',	function (Blueprint	$table) {
-			$table->string('email')->unique()->after('klas_id');
+		Schema::table('students',	function (Blueprint	$table) {
+			$table->string('wachtwoord')->unique()->after('achternaam');
 		});
 	}
+
 
 	/**
 	 * Reverse the migrations.
