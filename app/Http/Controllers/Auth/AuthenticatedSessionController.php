@@ -8,40 +8,49 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use App\Models\User;
 
 class AuthenticatedSessionController extends Controller
 {
-    /**
-     * Display the login view.
-     */
-    public function create(): View
-    {
-        return view('auth.login');
-    }
+	/**
+	 * Display the login view.
+	 */
+	public function create(): View
+	{
+		return view('auth.login');
+	}
 
-    /**
-     * Handle an incoming authentication request.
-     */
-    public function store(LoginRequest $request): RedirectResponse
-    {
-        $request->authenticate();
+	/**
+	 * Handle an incoming authentication request.
+	 */
+	public function store(LoginRequest $request): RedirectResponse
+	{
+		$request->authenticate();
+		$request->session()->regenerate();
 
-        $request->session()->regenerate();
+		$user = Auth::user(); // Haal de ingelogde gebruiker op
 
-        return redirect()->intended(route('dashboard', absolute: false));
-    }
+		if ($user->teacher) {
+			return redirect()->route('dashboard.teacher');
+		} elseif ($user->student) {
+			return redirect()->route('dashboard.student');
+		}
 
-    /**
-     * Destroy an authenticated session.
-     */
-    public function destroy(Request $request): RedirectResponse
-    {
-        Auth::guard('web')->logout();
+		return redirect()->route('dashboard');
+	}
 
-        $request->session()->invalidate();
 
-        $request->session()->regenerateToken();
+	/**
+	 * Destroy an authenticated session.
+	 */
+	public function destroy(Request $request): RedirectResponse
+	{
+		Auth::guard('web')->logout();
 
-        return redirect('/');
-    }
+		$request->session()->invalidate();
+
+		$request->session()->regenerateToken();
+
+		return redirect('/');
+	}
 }
