@@ -13,6 +13,8 @@ class Grade extends Model
 		'student_id',
 		'teacher_id',
 		'subject_id',
+		'cijfer',
+		'block',
 
 	];
 	public	function	student()
@@ -28,5 +30,10 @@ class Grade extends Model
 	public function	subject()
 	{
 		return	$this->belongsTo(Subject::class);
+	}
+
+	public function block()
+	{
+		return	$this->belongsTo(Block::class);
 	}
 }

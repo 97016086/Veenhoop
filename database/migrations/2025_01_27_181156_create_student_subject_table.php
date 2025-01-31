@@ -15,8 +15,8 @@ return new class extends Migration
 			$table->id();
 			$table->foreignId('student_id')->constrained()->onDelete('cascade');
 			$table->foreignId('subject_id')->constrained()->onDelete('cascade');
-			$table->decimal('grade',	5,	2)->nullable();
-			$table->data('ingeschreven_bij')->nullable();
+			$table->decimal('cijfer',	5,	2)->nullable();
+			$table->date('ingeschreven_bij')->nullable();
 			$table->timestamps();
 		});
 	}

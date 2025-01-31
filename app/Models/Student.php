@@ -13,10 +13,15 @@ class Student extends Model
 		return $this->hasMany(Grade::class);
 	}
 
+	public function klas()
+	{
+		return	$this->belongsTo(Klas::class);
+	}
+
 	public	function	subjects()
 	{
 		return	$this->belongsToMany(Subject::class, 'student_subject')
-			->withPivotValue(['grade', 'ingeschreven_bij'])
+			->withPivotValue(['cijfer', 'ingeschreven_bij'])
 			->withTimestamps();
 	}
 }
