@@ -14,7 +14,7 @@ class Subject extends Model
 		return	$this->hasMany(Grade::class);
 	}
 
-	public	function	teacher()
+	public	function	teachers()
 	{
 		return	$this->hasManyThrough(Teacher::class, Subject::class);
 	}
@@ -22,6 +22,13 @@ class Subject extends Model
 	public	function	students()
 	{
 		return	$this->belongsToMany(Student::class, 'student_subject')
+			->withPivotValue(['cijfer', 'ingeschreven_bij'])
+			->withTimestamps();
+	}
+
+	public	function	klas()
+	{
+		return	$this->belongsTo(Klas::class, 'klas_subject')
 			->withTimestamps();
 	}
 }

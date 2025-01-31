@@ -9,13 +9,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Klas extends Model
 {
 	use HasFactory;
-	public	function	student()
+	public	function	students()
 	{
 		return	$this->hasMany(Student::class);
 	}
 
-	public	function	subject()
+	public	function	subjects()
 	{
-		return	$this->hasMany(Subject::class);
+		return	$this->belongsToMany(Subject::class, 'klas_subject')
+			->withTimestamps();
 	}
 }
